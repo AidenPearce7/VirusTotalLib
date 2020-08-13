@@ -5,7 +5,7 @@ namespace VirusTotalApi.AV
     /// <summary>
     /// Represents the analysis object returned during File analysis
     /// </summary>
-    public interface IFileAnalysis
+    public interface IFileAnalysisResult
     {
         [Flags]
         /// <inheritdoc cref="IDomainAnalysis.Categories"/>
@@ -37,6 +37,19 @@ namespace VirusTotalApi.AV
 
         /// <inheritdoc cref="AnalysisResult.Result"/>
         public string Result { get; }
+    }
+
+    public interface IFileAnalysisStatistics
+    {
+        public int ConfirmedTimeout { get; }
+        public int Harmless { get; }
+        public int Failure { get; }
+        public int Malicious { get; }
+        public int Suspicious { get; }
+        public int Timeout { get; }
+        public int TypeUnsupported { get; }
+        public int Undetected { get; }
+
     }
 
 }

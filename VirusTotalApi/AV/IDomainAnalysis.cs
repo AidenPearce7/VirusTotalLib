@@ -5,7 +5,7 @@ namespace VirusTotalApi.AV
     /// <summary>
     /// Represents the analysis object returned during domain analysis
     /// </summary>
-    public interface IDomainAnalysis
+    public interface IDomainAnalysisResult
     {
         /// <summary>
         /// Normalized result of an analysis
@@ -44,4 +44,13 @@ namespace VirusTotalApi.AV
         string Result { get; }
     }
 
+    public interface IDomainAnalysisStatistics
+    {
+        public int Harmless { get; }
+        public int Malicious { get; }
+        public int Suspicious { get; }
+        public int Timeout { get; }
+        public int Undetected { get; }
+
+    }
 }

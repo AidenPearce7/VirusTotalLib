@@ -5,7 +5,7 @@ namespace VirusTotalApi.AV
     /// <summary>
     /// Represents the analysis object returned during Url or IP address analysis
     /// </summary>
-    public interface IUrlAnalysis
+    public interface IUrlAnalysisResult
     {
         /// <summary>
         /// Normalized result of an analysis
@@ -42,4 +42,13 @@ namespace VirusTotalApi.AV
         string Result { get; }
     }
 
+    public interface IUrlAnalysisStatistics
+    {
+        public int Harmless { get; }
+        public int Malicious { get; }
+        public int Suspicious { get; }
+        public int Timeout { get; }
+        public int Undetected { get; }
+
+    }
 }
