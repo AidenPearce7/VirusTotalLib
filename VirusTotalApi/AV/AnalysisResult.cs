@@ -5,13 +5,13 @@ namespace VirusTotalApi.AV
     /// <summary>
     /// Base class representing singular analysis
     /// </summary>
-    internal class AnalysisResult : IUrlAnalysis,IDomainAnalysis,IFileAnalysis
+    internal class AnalysisResult : IUrlAnalysisResult, IDomainAnalysisResult, IFileAnalysisResult
     {
         /// <summary>
         /// Normalised result
         /// </summary>
         [JsonPropertyName("category")]
-        public IFileAnalysis.Categories Category { get; set; }
+        public IFileAnalysisResult.Categories Category { get; set; }
 
         /// <summary>
         /// Name of the AV engine
@@ -43,8 +43,8 @@ namespace VirusTotalApi.AV
         [JsonPropertyName("result")]
         public string Result { get; set; }
 
-        IUrlAnalysis.Categories IUrlAnalysis.Category => (IUrlAnalysis.Categories)Category;
-        IDomainAnalysis.Categories IDomainAnalysis.Category => (IDomainAnalysis.Categories)Category;
+        IUrlAnalysisResult.Categories IUrlAnalysisResult.Category => (IUrlAnalysisResult.Categories)Category;
+        IDomainAnalysisResult.Categories IDomainAnalysisResult.Category => (IDomainAnalysisResult.Categories)Category;
     }
 
 }
