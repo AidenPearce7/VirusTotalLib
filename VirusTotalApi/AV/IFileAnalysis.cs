@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VirusTotalApi.AV
+namespace VirusTotalLib.AV
 {
     /// <summary>
     /// Represents the analysis object returned during File analysis

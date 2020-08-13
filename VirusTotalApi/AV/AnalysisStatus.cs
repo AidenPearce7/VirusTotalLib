@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace VirusTotalApi.AV
+namespace VirusTotalLib.AV
 {
     internal class AnalysisStatus : IAnalysisStatus
     {

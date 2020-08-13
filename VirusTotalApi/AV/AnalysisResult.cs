@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace VirusTotalApi.AV
+namespace VirusTotalLib.AV
 {
     /// <summary>
     /// Base class representing singular analysis
