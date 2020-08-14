@@ -7,6 +7,23 @@ namespace VirusTotalLib.AV
     {
         [JsonPropertyName("status")]
         public IAnalysisStatus.Statuses Status { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is AnalysisStatus)) return false;
+            if (((AnalysisStatus)obj).Status == Status) return true;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Status.ToString();
+        }
     }
     public interface IAnalysisStatus
     {
