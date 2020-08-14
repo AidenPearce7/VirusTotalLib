@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirusTotalLib", "VirusTotalApi\VirusTotalLib.csproj", "{A853FA98-1D8A-45A0-B376-B52EDF54DA1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirusTotalLib", "VirusTotalApi\VirusTotalLib.csproj", "{A853FA98-1D8A-45A0-B376-B52EDF54DA1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7DD372F4-9201-4944-81AE-A58E312B48D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A853FA98-1D8A-45A0-B376-B52EDF54DA1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A853FA98-1D8A-45A0-B376-B52EDF54DA1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A853FA98-1D8A-45A0-B376-B52EDF54DA1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD372F4-9201-4944-81AE-A58E312B48D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD372F4-9201-4944-81AE-A58E312B48D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD372F4-9201-4944-81AE-A58E312B48D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD372F4-9201-4944-81AE-A58E312B48D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
