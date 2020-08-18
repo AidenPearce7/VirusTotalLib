@@ -31,7 +31,7 @@ namespace VirusTotalLib.Converters
             {
                 if (reader.TokenType == JsonTokenType.EndObject) return dictionary;
                 string key = reader.GetString();
-                AnalysisResult value =  JsonSerializer.Deserialize<AnalysisResult>(ref reader, options);
+                AnalysisResult value = JsonSerializer.Deserialize<AnalysisResult>(ref reader, options);
                 dictionary.Add(key, value);
             }
             throw new JsonException();
@@ -39,7 +39,13 @@ namespace VirusTotalLib.Converters
 
         public override void Write(Utf8JsonWriter writer, Dictionary<string, IUrlAnalysisResult> value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            writer.WriteStartObject();
+            foreach (var KeyVal in value)
+            {
+                writer.WritePropertyName(KeyVal.Key);
+                JsonSerializer.Serialize<AnalysisResult>(writer, (AnalysisResult)KeyVal.Value, options);
+            }
+            writer.WriteEndObject();
         }
     }
     internal class AnalysisResultCategoryConverter : JsonConverter<IFileAnalysisResult.Categories>
@@ -61,7 +67,32 @@ namespace VirusTotalLib.Converters
 
         public override void Write(Utf8JsonWriter writer, IFileAnalysisResult.Categories value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            switch (value)
+            {
+                case IFileAnalysisResult.Categories.ConfirmedTimeout:
+                    writer.WriteStringValue("confirmed-timeout");
+                    break;
+                case IFileAnalysisResult.Categories.Failure:
+                    writer.WriteStringValue("failure");
+                    break;
+                case IFileAnalysisResult.Categories.Harmless:
+                    writer.WriteStringValue("harmless");
+                    break;
+                case IFileAnalysisResult.Categories.Malicious:
+                    writer.WriteStringValue("malicious");
+                    break;
+                case IFileAnalysisResult.Categories.Suspicious:
+                    writer.WriteStringValue("suspicious");
+                    break;
+                case IFileAnalysisResult.Categories.TypeUnsupported:
+                    writer.WriteStringValue("type-unsupported");
+                    break;
+                case IFileAnalysisResult.Categories.Undetected:
+                    writer.WriteStringValue("undeteced");
+                    break;
+                default:
+                    throw new JsonException();
+            }
         }
     }
     internal class VotesConverter : JsonConverter<IVotes>
@@ -73,7 +104,7 @@ namespace VirusTotalLib.Converters
 
         public override void Write(Utf8JsonWriter writer, IVotes value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            JsonSerializer.Serialize<Votes>(writer, (Votes)value, options);
         }
     }
     internal class DictTrackers : JsonConverter<Dictionary<string, ITracker[]>>
@@ -94,16 +125,31 @@ namespace VirusTotalLib.Converters
         private ITracker[] TrackerConverter(Tracker[] trackers)
         {
             ITracker[] endValue = new ITracker[trackers.Length];
-            for (int i =0;i<trackers.Length;i++)
+            for (int i = 0; i < trackers.Length; i++)
             {
                 endValue[i] = trackers[i];
+            }
+            return endValue;
+        }
+        private Tracker[] ITrackerConverter(ITracker[] trackers)
+        {
+            Tracker[] endValue = new Tracker[trackers.Length];
+            for (int i = 0; i < trackers.Length; i++)
+            {
+                endValue[i] = (Tracker)trackers[i];
             }
             return endValue;
         }
 
         public override void Write(Utf8JsonWriter writer, Dictionary<string, ITracker[]> value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            writer.WriteStartObject();
+            foreach (var KeyValue in value)
+            {
+                writer.WritePropertyName(KeyValue.Key);
+                JsonSerializer.Serialize<Tracker[]>(writer, ITrackerConverter(KeyValue.Value), options);
+            }
+            writer.WriteEndObject();
         }
     }
     internal class StatisticsConverter : JsonConverter<IUrlAnalysisStatistics>
@@ -115,7 +161,7 @@ namespace VirusTotalLib.Converters
 
         public override void Write(Utf8JsonWriter writer, IUrlAnalysisStatistics value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            JsonSerializer.Serialize<AnalysisStatistics>(writer, (AnalysisStatistics)value, options);
         }
     }
 }
