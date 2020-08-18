@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace VirusTotalLib.Url
 {
@@ -53,6 +57,7 @@ namespace VirusTotalLib.Url
         /// <inheritdoc cref="Url.OrignialUrl"/>
         public string OrignialUrl { get; }
 
+        Task Serialize(Stream stream, JsonSerializerOptions options = null, CancellationToken cancellationToken = default);
     }
     /// <inheritdoc cref="PremiumUrl"/>
     public interface IPremiumUrl : IUrl
@@ -71,5 +76,7 @@ namespace VirusTotalLib.Url
         }
         /// <inheritdoc cref="PremiumUrl.Favicon"/>
         IReadOnlyDictionary<FaviconEnum, string> Favicon { get; }
+
+        new Task Serialize(Stream stream, JsonSerializerOptions options = null, CancellationToken cancellationToken = default);
     }
 }

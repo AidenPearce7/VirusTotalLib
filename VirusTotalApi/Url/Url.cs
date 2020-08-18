@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 using VirusTotalLib.AV;
 using VirusTotalLib.VT;
 
@@ -34,7 +38,7 @@ namespace VirusTotalLib.Url
         [JsonPropertyName("last_analysis_date")]
         [JsonConverter(typeof(Converters.DateTimeOffsetConverter))]
         public DateTimeOffset LastAnalysisDate { get; set; }
-        
+
         /// <summary>
         /// Result from URl scanners, scanner name is key
         /// </summary>
@@ -166,6 +170,11 @@ namespace VirusTotalLib.Url
             return base.GetHashCode();
         }
 
+        async Task IUrl.Serialize(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken)
+        {
+            await JsonSerializer.SerializeAsync<Url>(stream, this, options, cancellationToken);
+        }
+
         public override string ToString()
         {
             return OrignialUrl;
@@ -182,5 +191,14 @@ namespace VirusTotalLib.Url
         public Dictionary<IPremiumUrl.FaviconEnum, string> Favicon { get; set; }
 
         IReadOnlyDictionary<IPremiumUrl.FaviconEnum, string> IPremiumUrl.Favicon => Favicon;
+        async Task IPremiumUrl.Serialize(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken)
+        {
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
+            await JsonSerializer.SerializeAsync<PremiumUrl>(stream, this, options, cancellationToken);
+        }
     }
 }
